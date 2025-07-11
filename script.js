@@ -8,7 +8,6 @@ class TiltReveal {
     this.instructions = document.getElementById('instructions');
 
     this.isActivated = false;
-    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     this.isAnimating = false;
     this.currentState = 'hidden';
     this.yellowPanelRevealed = false;
@@ -17,12 +16,20 @@ class TiltReveal {
   }
 
   init() {
-    if (!this.isMobile) {
+    if (this.isDeviceWithGyro()) {
+      this.setupActivationButton();
+    } else {
       this.hideActivationOverlay();
       this.setupMouseEvents();
-    } else {
-      this.setupActivationButton();
     }
+  }
+
+  isDeviceWithGyro() {
+    return (
+      typeof DeviceOrientationEvent !== 'undefined' &&
+      'ontouchstart' in window &&
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    );
   }
 
   hideActivationOverlay() {
@@ -123,7 +130,6 @@ class TiltReveal {
     this.contentWrapper.classList.add('rotate-out');
     this.yellowPanel.classList.add('rotate-in');
 
-    // Play the video when revealed
     if (this.videoPanel) {
       this.videoPanel.play();
     }
