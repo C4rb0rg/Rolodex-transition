@@ -17,8 +17,12 @@ class TiltReveal {
   }
 
   preventScrolling() {
-    // Prevent scrolling and zooming on mobile
+    // Prevent scrolling and zooming on mobile but allow page refresh
     document.addEventListener('touchmove', (e) => {
+      // Allow pull-to-refresh on mobile by checking if it's a downward swipe from top
+      if (e.touches[0].clientY < 100 && e.touches[0].clientY > 0) {
+        return; // Allow the default behavior for pull-to-refresh
+      }
       e.preventDefault();
     }, { passive: false });
 
@@ -34,7 +38,7 @@ class TiltReveal {
       }
     }, { passive: false });
 
-    // Prevent double-tap zoom
+    // Prevent double-tap zoom but allow single taps
     let lastTouchEnd = 0;
     document.addEventListener('touchend', (e) => {
       const now = (new Date()).getTime();
