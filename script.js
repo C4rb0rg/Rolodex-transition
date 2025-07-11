@@ -13,6 +13,36 @@ class TiltReveal {
     this.yellowPanelRevealed = false;
 
     this.init();
+    this.preventScrolling();
+  }
+
+  preventScrolling() {
+    // Prevent scrolling and zooming on mobile
+    document.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    document.addEventListener('touchend', (e) => {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // Prevent double-tap zoom
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (e) => {
+      const now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
   }
 
   init() {
@@ -131,7 +161,10 @@ class TiltReveal {
     this.yellowPanel.classList.add('rotate-in');
 
     if (this.videoPanel) {
-      this.videoPanel.play();
+      // Ensure video plays inline without opening native player
+      this.videoPanel.play().catch(e => {
+        console.log('Video play failed:', e);
+      });
     }
 
     setTimeout(() => {

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
   <title>Tilt to Reveal Video</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -16,9 +16,22 @@
       </div>
     </div>
 
-    <!-- Updated: Video panel -->
     <div class="yellow-panel" id="yellowPanel">
-      <video id="videoPanel" class="video-panel" src="stopmotion updated.mp4" muted loop></video>
+      <video 
+        id="videoPanel" 
+        class="video-panel" 
+        src="stopmotion updated.mp4" 
+        muted 
+        loop 
+        playsinline 
+        webkit-playsinline 
+        preload="auto"
+        disablePictureInPicture
+        controlslist="nodownload nofullscreen noremoteplayback"
+        x5-video-player-type="h5"
+        x5-video-player-fullscreen="true"
+        x5-video-orientation="portraint"
+      ></video>
       <div class="overlay-text">we'll make it happen</div>
     </div>
 
@@ -30,11 +43,7 @@
         Activate
       </button>
     </div>
-
-    <!-- <div class="instructions" id="instructions">
-      Move your mouse left or tilt your device left
-    </div>
-  </div> -->
+  </div>
 
   <script src="script.js"></script>
 </body>

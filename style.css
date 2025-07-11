@@ -4,21 +4,37 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
+
 body {
   font-family: 'Arial', sans-serif;
   background: #000;
   color: #fff;
-  overflow: hidden;
   height: 100vh;
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: none;
 }
 
 .container {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: #000;
   perspective: 1000px;
+  overflow: hidden;
 }
 
 .content-wrapper {
@@ -35,8 +51,8 @@ body {
 
 .main-text {
   position: absolute;
-  bottom: clamp(1rem, 8vh, 4rem);
-  left: clamp(1rem, 6vw, 4rem);
+  bottom: max(env(safe-area-inset-bottom, 0px), 2rem);
+  left: max(env(safe-area-inset-left, 0px), 2rem);
   font-size: clamp(2rem, 8vw, 6rem);
   font-weight: 900;
   text-transform: uppercase;
@@ -46,8 +62,11 @@ body {
   color: #fff;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
   z-index: 10;
-  max-width: 90%;
+  max-width: calc(100vw - 4rem);
   word-wrap: break-word;
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 1rem);
+  padding-left: max(env(safe-area-inset-left, 0px), 1rem);
+  padding-right: max(env(safe-area-inset-right, 0px), 1rem);
 }
 
 .yellow-panel {
@@ -98,13 +117,15 @@ body {
   text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
   z-index: 2;
   pointer-events: none;
+  max-width: 90%;
+  padding: 0 1rem;
 }
 
 .activation-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.9);
   display: flex;
@@ -128,6 +149,7 @@ body {
   margin-bottom: 2rem;
   max-width: 80%;
   line-height: 1.4;
+  padding: 0 1rem;
 }
 
 .activate-button {
@@ -143,6 +165,7 @@ body {
   letter-spacing: 0.1em;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+  touch-action: manipulation;
 }
 
 .activate-button:hover {
@@ -156,92 +179,69 @@ body {
 
 .instructions {
   position: fixed;
-  bottom: clamp(0.5rem, 3vh, 2rem);
-  right: clamp(0.5rem, 3vw, 2rem);
+  bottom: max(env(safe-area-inset-bottom, 0px), 1rem);
+  right: max(env(safe-area-inset-right, 0px), 1rem);
   font-size: clamp(0.8rem, 2.5vw, 1rem);
   opacity: 0.7;
   text-align: right;
   z-index: 15;
   max-width: 200px;
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.5rem);
+  padding-right: max(env(safe-area-inset-right, 0px), 0.5rem);
 }
 
 @media (max-width: 768px) {
   .main-text {
-    bottom: 2rem;
-    left: 2rem;
-    font-size: 10vw;
-    max-width: 80%;
+    bottom: max(env(safe-area-inset-bottom, 0px), 1.5rem);
+    left: max(env(safe-area-inset-left, 0px), 1.5rem);
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    max-width: calc(100vw - 3rem);
   }
   
   .instructions {
-    bottom: 1rem;
-    right: 1rem;
-    font-size: 3vw;
+    bottom: max(env(safe-area-inset-bottom, 0px), 0.5rem);
+    right: max(env(safe-area-inset-right, 0px), 0.5rem);
+    font-size: clamp(0.7rem, 3vw, 0.9rem);
     max-width: 150px;
   }
 
   .activation-text {
-    font-size: 5vw;
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
   }
 
   .activate-button {
-    font-size: 4vw;
+    font-size: clamp(1rem, 4vw, 1.1rem);
+    padding: 0.8rem 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .main-text {
-    bottom: 1.5rem;
-    left: 1.5rem;
-    font-size: 12vw;
-    max-width: 85%;
+    bottom: max(env(safe-area-inset-bottom, 0px), 1rem);
+    left: max(env(safe-area-inset-left, 0px), 1rem);
+    font-size: clamp(2rem, 12vw, 4rem);
+    max-width: calc(100vw - 2rem);
   }
 
   .activation-text {
-    font-size: 6vw;
+    font-size: clamp(1rem, 6vw, 1.5rem);
   }
 
   .activate-button {
-    font-size: 5vw;
+    font-size: clamp(0.9rem, 5vw, 1rem);
+    padding: 0.7rem 1.2rem;
   }
 
   .instructions {
-    font-size: 4vw;
+    font-size: clamp(0.6rem, 4vw, 0.8rem);
   }
 }
 
-@media (min-width: 1200px) {
+/* iPhone X and newer safe area handling */
+@supports (padding: max(0px)) {
   .main-text {
-    font-size: 96px;
-  }
-  
-  .activation-text {
-    font-size: 48px;
-  }
-  
-  .activate-button {
-    font-size: 36px;
-  }
-  
-  .instructions {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 320px) {
-  .main-text {
-    font-size: 38px;
-  }
-  
-  .activation-text {
-    font-size: 19px;
-  }
-  
-  .activate-button {
-    font-size: 16px;
-  }
-  
-  .instructions {
-    font-size: 13px;
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+    padding-left: max(env(safe-area-inset-left), 1rem);
+    padding-right: max(env(safe-area-inset-right), 1rem);
   }
 }
