@@ -1,4 +1,4 @@
-// === script.js updated ===
+// FINAL FIXED script.js
 
 class TiltReveal {
   constructor() {
@@ -15,29 +15,20 @@ class TiltReveal {
     this.yellowPanelRevealed = false;
 
     this.init();
-    this.preventScrolling();
+    this.loosenTouchRestrictions();
   }
 
-  preventScrolling() {
-    // Allow pull-to-refresh if swipe starts near top
-    document.addEventListener('touchmove', (e) => {
-      if (e.touches[0].clientY < 50) {
-        return;
-      }
-      e.preventDefault();
-    }, { passive: false });
-
+  loosenTouchRestrictions() {
+    // Only block zoom/pinch, allow scroll including pull-to-refresh
     document.addEventListener('touchstart', (e) => {
       if (e.touches.length > 1) {
         e.preventDefault();
       }
     }, { passive: false });
 
-    document.addEventListener('touchend', (e) => {
-      if (e.touches.length > 1) {
-        e.preventDefault();
-      }
-    }, { passive: false });
+    document.addEventListener('gesturestart', (e) => {
+      e.preventDefault();
+    });
 
     let lastTouchEnd = 0;
     document.addEventListener('touchend', (e) => {
