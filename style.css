@@ -1,3 +1,5 @@
+/* === style.css updated === */
+
 * {
   margin: 0;
   padding: 0;
@@ -57,13 +59,14 @@ body {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  line-height: 0.9;
+  line-height: 1;
   text-align: left;
   color: #fff;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
   z-index: 10;
   max-width: calc(100vw - 4rem);
-  word-wrap: break-word;
+  max-height: 80vh;
+  overflow-wrap: break-word;
 }
 
 .yellow-panel {
@@ -78,7 +81,9 @@ body {
   z-index: 5;
   will-change: transform;
   backface-visibility: hidden;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .yellow-panel.rotate-in {
@@ -115,7 +120,7 @@ body {
   z-index: 2;
   pointer-events: none;
   max-width: 90%;
-  padding: 0 1rem;
+  width: fit-content;
 }
 
 .activation-overlay {
@@ -191,8 +196,9 @@ body {
     left: 2rem;
     font-size: clamp(2.5rem, 10vw, 5rem);
     max-width: calc(100vw - 4rem);
+    max-height: 80vh;
   }
-  
+
   .instructions {
     bottom: 1rem;
     right: 1rem;
@@ -216,6 +222,7 @@ body {
     left: 1.5rem;
     font-size: clamp(2rem, 12vw, 4rem);
     max-width: calc(100vw - 3rem);
+    max-height: 80vh;
   }
 
   .activation-text {
@@ -231,5 +238,3 @@ body {
     font-size: clamp(0.6rem, 4vw, 0.8rem);
   }
 }
-
-/* Remove iPhone X safe area handling for Android compatibility */

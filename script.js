@@ -1,3 +1,5 @@
+// === script.js updated ===
+
 class TiltReveal {
   constructor() {
     this.contentWrapper = document.getElementById('contentWrapper');
@@ -17,11 +19,10 @@ class TiltReveal {
   }
 
   preventScrolling() {
-    // Prevent scrolling and zooming on mobile but allow page refresh
+    // Allow pull-to-refresh if swipe starts near top
     document.addEventListener('touchmove', (e) => {
-      // Allow pull-to-refresh on mobile by checking if it's a downward swipe from top
-      if (e.touches[0].clientY < 100 && e.touches[0].clientY > 0) {
-        return; // Allow the default behavior for pull-to-refresh
+      if (e.touches[0].clientY < 50) {
+        return;
       }
       e.preventDefault();
     }, { passive: false });
@@ -38,10 +39,9 @@ class TiltReveal {
       }
     }, { passive: false });
 
-    // Prevent double-tap zoom but allow single taps
     let lastTouchEnd = 0;
     document.addEventListener('touchend', (e) => {
-      const now = (new Date()).getTime();
+      const now = new Date().getTime();
       if (now - lastTouchEnd <= 300) {
         e.preventDefault();
       }
@@ -165,7 +165,6 @@ class TiltReveal {
     this.yellowPanel.classList.add('rotate-in');
 
     if (this.videoPanel) {
-      // Ensure video plays inline without opening native player
       this.videoPanel.play().catch(e => {
         console.log('Video play failed:', e);
       });
