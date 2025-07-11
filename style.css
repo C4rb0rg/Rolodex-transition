@@ -1,0 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  perspective: 1000px;
+}
+
+.content-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: bottom left;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.main-text {
+  position: absolute;
+  bottom: 4rem;
+  left: 4rem;
+  font-size: 8vw;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 0.9;
+  text-align: left;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+  z-index: 10;
+  max-width: 60%;
+  word-wrap: break-word;
+}
+
+.yellow-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: bottom left;
+  transform: rotate(90deg);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+  will-change: transform;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.yellow-panel.rotate-in {
+  transform: rotate(0deg);
+}
+
+.content-wrapper.rotate-out {
+  transform: rotate(-45deg);
+}
+
+.video-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.activation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.activation-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.activation-text {
+  font-size: 4vw;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.activate-button {
+  background: #ffeb3b;
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 3vw;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+}
+
+.activate-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 235, 59, 0.4);
+}
+
+.activate-button:active {
+  transform: translateY(0);
+}
+
+.instructions {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 2vw;
+  opacity: 0.7;
+  text-align: right;
+  z-index: 15;
+  max-width: 200px;
+}
+
+/* Add your existing media queries below as needed */
+
+
+@media (max-width: 768px) {
+  .main-text {
+    bottom: 2rem;
+    left: 2rem;
+    font-size: 10vw;
+    max-width: 80%;
+  }
+  
+  .instructions {
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 3vw;
+    max-width: 150px;
+  }
+
+  .activation-text {
+    font-size: 5vw;
+  }
+
+  .activate-button {
+    font-size: 4vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-text {
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-size: 12vw;
+    max-width: 85%;
+  }
+
+  .activation-text {
+    font-size: 6vw;
+  }
+
+  .activate-button {
+    font-size: 5vw;
+  }
+
+  .instructions {
+    font-size: 4vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main-text {
+    font-size: 96px;
+  }
+  
+  .activation-text {
+    font-size: 48px;
+  }
+  
+  .activate-button {
+    font-size: 36px;
+  }
+  
+  .instructions {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 320px) {
+  .main-text {
+    font-size: 38px;
+  }
+  
+  .activation-text {
+    font-size: 19px;
+  }
+  
+  .activate-button {
+    font-size: 16px;
+  }
+  
+  .instructions {
+    font-size: 13px;
+  }
+}

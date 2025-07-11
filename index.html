@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tilt to Reveal Video</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="content-wrapper" id="contentWrapper">
+      <div class="main-text">
+        Tilt to see<br>
+        a whole<br>
+        new angle
+      </div>
+    </div>
+
+    <!-- Updated: Video panel -->
+    <div class="yellow-panel" id="yellowPanel">
+      <video id="videoPanel" class="video-panel" src="stopmotion updated.mp4" muted loop></video>
+      <div class="overlay-text">we'll make it happen</div>
+    </div>
+
+    <div class="activation-overlay" id="activationOverlay">
+      <div class="activation-text">
+        Tap to activate motion sensors and experience the magic
+      </div>
+      <button class="activate-button" id="activateButton">
+        Activate
+      </button>
+    </div>
+
+    <!-- <div class="instructions" id="instructions">
+      Move your mouse left or tilt your device left
+    </div>
+  </div> -->
+
+  <script src="script.js"></script>
+</body>
+</html>
