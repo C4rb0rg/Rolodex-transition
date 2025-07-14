@@ -1,4 +1,4 @@
-// FINAL FIXED script.js
+// FINAL FIXED script.js with trigger on right side
 
 class TiltReveal {
   constructor() {
@@ -19,7 +19,6 @@ class TiltReveal {
   }
 
   loosenTouchRestrictions() {
-    // Only block zoom/pinch, allow scroll including pull-to-refresh
     document.addEventListener('touchstart', (e) => {
       if (e.touches.length > 1) {
         e.preventDefault();
@@ -138,9 +137,9 @@ class TiltReveal {
     if (this.isAnimating || this.yellowPanelRevealed) return;
 
     const position = mouseX / windowWidth;
-    const threshold = 0.3;
+    const threshold = 0.7; // Trigger on right side now
 
-    if (position < threshold) {
+    if (position > threshold) {
       this.showYellowPanel();
     }
   }

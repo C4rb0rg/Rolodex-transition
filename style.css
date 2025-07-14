@@ -1,4 +1,8 @@
-{
+
+/* FINAL FIXED style.css with correct text placement and reload fixes */
+
+/* Universal box-sizing and reset */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,6 +11,7 @@
 html, body {
   height: 100%;
   width: 100%;
+  /* Consider removing overflow: hidden if you want scrollbars for content overflow */
   overflow: hidden;
 }
 
@@ -21,6 +26,7 @@ body {
   width: 100%;
   height: 100%;
   perspective: 1000px;
+  /* overflow: hidden is used here to contain child elements, but may cause issues if content overflows */
   overflow: hidden;
 }
 
@@ -32,6 +38,7 @@ body {
   height: 100%;
   transform-origin: bottom left;
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  /* will-change and backface-visibility are used for performance, but avoid overusing */
   will-change: transform;
   backface-visibility: hidden;
 }
@@ -64,6 +71,7 @@ body {
   transform: rotate(90deg);
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 5;
+  /* Only use will-change and backface-visibility if you see performance issues */
   will-change: transform;
   backface-visibility: hidden;
   display: flex;
@@ -118,7 +126,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 20;
+  z-index: 20; /* Ensure this is above all other elements, but avoid excessive stacking */
   opacity: 1;
   transition: opacity 0.5s ease;
 }
@@ -170,6 +178,6 @@ body {
   font-size: clamp(0.8rem, 2.5vw, 1rem);
   opacity: 0.7;
   text-align: right;
-  z-index: 15;
+  z-index: 15; /* Lower than .activation-overlay to avoid overlap */
   max-width: 200px;
 }
